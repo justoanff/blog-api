@@ -1,0 +1,9 @@
+fastapi[standard]
+sqlmodel
+psycopg
+passlib[bcrypt]
+python-jose[cryptography]
+alembic
+pytest
+pydantic-settings
+redis

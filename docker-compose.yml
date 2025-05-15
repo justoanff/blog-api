@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    networks:
+      - blog_network
+    depends_on:
+      - db
+
+  # Định nghĩa db ở đây nhưng có thể bỏ qua khi chỉ chạy backend
+  # Sử dụng profiles để có thể chạy hoặc không chạy dịch vụ này
+  db:
+    image: postgres:15
+    profiles: ["all"]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    networks:
+      - blog_network
+
+networks:
+  blog_network:
+    name: blog_network
+    external: true
+
+volumes:
+  postgres_data:
+    external: true

@@ -1,0 +1,43 @@
+image: python:3.11-slim
+
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+
+cache:
+  paths:
+    - .pip-cache/
+
+before_script:
+  - pip install uv
+  - uv pip install -r requirements.txt
+
+test:
+  stage: test
+  services:
+    - postgres:15
+  variables:
+    POSTGRES_DB: test_db
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+    POSTGRES_SERVER: postgres
+  script:
+    - pytest
+
+build:
+  stage: build
+  script:
+    - echo "Building the application..."
+  only:
+    - main
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying the application..."
+  only:
+    - main
