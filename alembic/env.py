@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), '..'
 from app.models.base_model import BaseModel
 from app.models.user_model import User
 from app.models.post_model import Post
+from app.models.refresh_token_model import RefreshToken
 from app.config.settings import get_settings
 
 # this is the Alembic Config object, which provides

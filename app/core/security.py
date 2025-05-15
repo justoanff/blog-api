@@ -5,7 +5,6 @@ from uuid import uuid4
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 import redis
-from redis.asyncio import Redis
 
 from app.config.settings import get_settings
 from app.schemas.token_schema import TokenPayload
